@@ -1,47 +1,45 @@
-
 ## Ex 01 -Simple Web Server using Spring Boot
 
 ## AIM:
+
 To develop a Simple Web Server using Spring Boot that can handle basic HTTP requests and return appropriate responses through RESTful endpoints.
+
 ## ALGORITHM:
-Start a New Spring Boot Project:
 
-Use Spring Initializr (https://start.spring.io/)
+1. Start a New Spring Boot Project:
+   - Use Spring Initializr (https://start.spring.io/)
+   - Select dependencies: Spring Web
 
-Select dependencies: Spring Web
+2. Create the Main Application Class:
+   - This class contains the main() method with @SpringBootApplication annotation to bootstrap the application.
 
-Create the Main Application Class:
+3. Create a Controller Class:
+   - Create a class annotated with @RestController.
+   - Define one or more HTTP request handler methods using @GetMapping, @PostMapping, etc.
 
-This class contains the main() method with @SpringBootApplication annotation to bootstrap the application.
+4. Write Endpoint Methods:
+   - Inside the controller, define a simple method for handling GET requests
+     (e.g., return “Hello World” when /hello is accessed).
 
-Create a Controller Class:
+5. Run the Application:
+   - Run the application using your IDE or via the command line:
+     mvn spring-boot:run
+     or
+     ./mvnw spring-boot:run
 
-Create a class annotated with @RestController.
+6. Test the Endpoint:
+   - Open a web browser or use Postman to visit:
+     http://localhost:8080/hello
 
-Define one or more HTTP request handler methods using @GetMapping, @PostMapping, etc.
+   - You should see the output:
+     "Hello World"
 
-Write Endpoint Methods:
+7. Stop the Server:
+   - Stop the Spring Boot server once testing is complete.
 
-Inside the controller, define a simple method for handling GET requests (e.g., return “Hello World” when /hello is accessed).
+## Program
 
-Run the Application:
-
-Run the application using your IDE or via the command line (mvn spring-boot:run or ./mvnw spring-boot:run).
-
-Test the Endpoint:
-
-Open a web browser or use Postman to visit:
-http://localhost:8080/hello
-
-You should see the output (e.g., "Hello World").
-
-Stop the Server:
-
-Stop the Spring Boot server once testing is complete.
-
-
-## Program 
-
+```
 simple-web-server/
 ├── src/
 │   └── main/
@@ -52,63 +50,91 @@ simple-web-server/
 │       └── resources/
 │           └── application.properties
 ├── pom.xml
+```
 
- ### Pom.xml
+### Pom.xml
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>4.0.6</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>simple_web_server</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name/>
+	<description/>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc</artifactId>
+		</dependency>
 
-    <groupId>com.example</groupId>
-    <artifactId>simple-web-server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>Simple Web Server</name>
-    <description>Demo project for Spring Boot Web Server</description>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.2</version>
-        <relativePath/>
-    </parent>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
-    <dependencies>
-        <!-- Spring Boot Web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>
 
-### DemoApplication.java
+```
 
-package com.example.demo;
+### SimpleWebServerApplication.java
+
+```java
+package com.example.simple_web_server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
-    }
+public class SimpleWebServerApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SimpleWebServerApplication.class, args);
+	}
+
 }
 
+```
 
 ### HelloController.java
-package com.example.demo;
+
+```java
+package com.example.simple_web_server.;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -120,16 +146,16 @@ public class HelloController {
     public String sayHello() {
         return "Hello, Spring Boot!";
     }
-}
 
+}
+```
 
 ### application.properties:
 
- server.port=8081
-
-
-
+```java
+spring.application.name=simple_web_server
+```
 
 Output:
 
-
+![alt text](Screenshots/image.png)
